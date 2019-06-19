@@ -1,0 +1,26 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Copyright 2019 Carlos Alejandro Escobar Marulanda
+${licensePrefix}Permission is hereby granted, free of charge, to any person 
+${licensePrefix}obtaining a copy of this software and associated documentation 
+${licensePrefix}files (the "Software"), to deal in the Software without 
+${licensePrefix}restriction, including without limitation the rights to use, 
+${licensePrefix}copy, modify, merge, publish, distribute, sublicense, and/or 
+${licensePrefix}sell copies of the Software, and to permit persons to whom the 
+${licensePrefix}Software is furnished to do so, subject to the following 
+${licensePrefix}conditions:
+${licensePrefix}The above copyright notice and this permission notice shall 
+${licensePrefix}be included in all copies or substantial portions of the 
+${licensePrefix}Software.
+${licensePrefix}THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+${licensePrefix}EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+${licensePrefix}OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
+${licensePrefix}NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+${licensePrefix}HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+${licensePrefix} WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+${licensePrefix}FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
+${licensePrefix}OTHER DEALINGS IN THE SOFTWARE.
+<#if licenseLast??>
+${licenseLast}
+</#if>
