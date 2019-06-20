@@ -56,6 +56,8 @@ public class EjemploForma2 {
         
         PolinomioVectorForma2 polC = polA.sumar(polB);
         System.out.println(polC.mostrar());
+        
+        System.out.println("Coeficiente de exponente 2 " + polC.getCoeficiente(2));
 
     }
 

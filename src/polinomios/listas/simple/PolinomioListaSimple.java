@@ -148,8 +148,18 @@ public class PolinomioListaSimple {
         return pC;
     }
 
-    public int getCoeficiente(int e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double getCoeficiente(int exponente) {
+        // Variables para los recorridos en polinomios a,b y c
+        Nodo prA = this.getCabeza().getLiga();
+
+        double coeficiente = 0;
+        while (!finRecorrido(prA)) {
+            if (prA.getTermino().getE() == exponente) {
+                return prA.getTermino().getC();
+            }
+            prA = prA.getLiga();
+        }
+        return coeficiente;
     }
 
     public int getDiferentesCero() {

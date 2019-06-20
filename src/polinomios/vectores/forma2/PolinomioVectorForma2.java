@@ -165,5 +165,20 @@ public class PolinomioVectorForma2 {
         }
         return polC;
     }
+    
+    /**
+     * Obtiene el coeficiente de un termino dado un exponente
+     * @param exponente
+     * @return 
+     */
+    public double getCoeficiente( int exponente){
+        double coeficiente = 0;
+        for( Termino t: terminos){
+            if( t.getE() == exponente){
+                return t.getC();
+            }
+        }
+        return coeficiente;
+    }
 
 }

@@ -49,7 +49,9 @@ public class EjemploPolinomioListaSimple {
         System.out.println( pA.mostrar()) ;
         System.out.println( pB.mostrar()) ;
         System.out.println( pC.mostrar()) ;
-
+        
+        System.out.println("Coeficiente con exponente 2 " + pC.getCoeficiente(2));
+        System.out.println("Coeficiente con exponente 0 " + pC.getCoeficiente(0));
 
     }
 
