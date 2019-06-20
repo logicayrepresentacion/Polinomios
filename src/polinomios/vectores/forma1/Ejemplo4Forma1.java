@@ -26,26 +26,25 @@ package polinomios.vectores.forma1;
  *
  * @author alejandroescobar
  */
-public class Ejemplo3Forma1 {
+public class Ejemplo4Forma1 {
 
     /**
      * @param args the command line arguments
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-        // 8x6  + 4x3 – 5
-        int arrPolA[] = { 6, 8, 0, 0, 4, 0, 0, -5};
-        // -8x6 - 4x3 – 5
-        int arrPolB[] = { 6, -8, 0, 0, -4, 0, 0, +5};
         
-        PolinomioVectorForma1 polA = new PolinomioVectorForma1(arrPolA);
-        PolinomioVectorForma1 polB = new PolinomioVectorForma1(arrPolB);
+        PolinomioVectorForma1 polA = new PolinomioVectorForma1();
         
-        System.out.println( polA );
-        System.out.println( polB );
+        polA = polA.sumar(4, 2);
+        polA = polA.sumar(100, 200);
+        polA = polA.sumar(98, 1000);
+        polA = polA.sumar(4, 2);
+        polA = polA.sumar(4, 2);
+        polA = polA.sumar(4, 2);
         
-        PolinomioVectorForma1 polNuevo = polA.sumar(polB);
-        System.out.println( polNuevo );
+        
+        System.out.println( polA ) ;
     }
     
 }

@@ -30,8 +30,9 @@ public class Ejemplo2Forma1 {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // 8x6  + 4x3 – 5
         int arrPolA[] = { 6, 8, 0, 0, 4, 0, 0, -5};
         // -8x6 + 10x + 20
@@ -40,11 +41,11 @@ public class Ejemplo2Forma1 {
         PolinomioVectorForma1 polA = new PolinomioVectorForma1(arrPolA);
         PolinomioVectorForma1 polB = new PolinomioVectorForma1(arrPolB);
         
-        System.out.println( polA.mostrar());
-        System.out.println( polB.mostrar());
+        System.out.println( polA );
+        System.out.println( polB );
         
         PolinomioVectorForma1 polNuevo = polA.sumar(polB);
-        System.out.println( polNuevo.mostrar());
+        System.out.println( polNuevo );
     }
     
 }
