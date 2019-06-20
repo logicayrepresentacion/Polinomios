@@ -25,33 +25,32 @@ package polinomios.listas.simple;
 import polinomios.util.Termino;
 
 /**
- * Clase que representa un nodo simple en una lista ligada
+ *
  * @author alejandroescobar
  */
-class Nodo {
-    private Termino termino;
-    private Nodo liga;
+public class EjemploPolinomioListaSimple {
 
-    Nodo(Termino t) {
-        termino = t;
+    public static void main(String[] args) {
+        PolinomioListaSimple pA = new PolinomioListaSimple();
+        Termino t = new Termino(10, 5);
+        Nodo n = new Nodo(t);
+        Nodo cA = pA.getCabeza();
+        cA.setLiga(n);
+        cA = n;
+        
+        t = new Termino(0, 20);
+        n = new Nodo(t);
+        cA.setLiga(n);
+        
+        PolinomioListaSimple pB = pA;
+        
+        PolinomioListaSimple pC = pA.sumar(pB);
+        
+        System.out.println( pA.mostrar()) ;
+        System.out.println( pB.mostrar()) ;
+        System.out.println( pC.mostrar()) ;
+
+
     }
 
-    public Termino getTermino() {
-        return termino;
-    }
-
-    public void setTermino(Termino termino) {
-        this.termino = termino;
-    }
-
-    public Nodo getLiga() {
-        return liga;
-    }
-
-    public void setLiga(Nodo liga) {
-        this.liga = liga;
-    }
-    
-    
-    
 }
