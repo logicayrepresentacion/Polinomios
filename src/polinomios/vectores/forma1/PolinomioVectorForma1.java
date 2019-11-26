@@ -44,7 +44,7 @@ public class PolinomioVectorForma1 {
     }
 
     /**
-     * Para realizar pruebas
+     * Constructor de un polinomio conociendo el arreglo de enteros
      *
      * @param arreglo
      */
@@ -56,7 +56,8 @@ public class PolinomioVectorForma1 {
      * Constructor que cree un arreglo sin coeficiente
      */
     PolinomioVectorForma1() {
-
+        arreglo = new int[1];
+        arreglo[0] = -1;
     }
 
     public int getGrado() throws Exception {
@@ -76,6 +77,9 @@ public class PolinomioVectorForma1 {
      */
     public int getCoeficiente(int exp) throws Exception {
         int pos = getGrado() - exp + 1;
+        if (pos >= arreglo.length) {
+            throw new ArrayIndexOutOfBoundsException("El arreglo es de menor tamaño que la posición calculada");
+        }
         return arreglo[pos];
     }
 
@@ -97,6 +101,10 @@ public class PolinomioVectorForma1 {
         try {
             for (int i = 1; i < arreglo.length; i++) {
                 int j = arreglo[i];
+                // Para adicionar el simbolo del coeficiente para numeros positivos, excluyendo el simbolo + del primer termino si es positivo.
+                if (j >= 0 && i != 1) {
+                    polinomio.append("+");
+                }
                 polinomio.append(j).append("X^").append(getExponente(i)).append(" ");
             }
         } catch (Exception e) {
@@ -112,7 +120,7 @@ public class PolinomioVectorForma1 {
 
     /**
      * Función para Sumar dos polinomios, entrega un nuevo polinomio resultado
-     * de la operación suma.
+     * de la operación suma. No modifica el polinomio que representa el objeto
      *
      * @param polB
      * @return
@@ -123,7 +131,7 @@ public class PolinomioVectorForma1 {
         PolinomioVectorForma1 polC;
 
         if (polB == null) {
-            throw new Exception("el polinomio b es null");
+            throw new Exception("El polinomio b es null");
         }
 
         // Bloque para validar si los arreglos son nulos o no
@@ -215,12 +223,12 @@ public class PolinomioVectorForma1 {
      * Sumar al polinomio a (this) un termino, la estrategia es crear un
      * polinomio b de un solo termino y luego sumar a y b
      *
-     * @param exponente
      * @param coeficiente
+     * @param exponente
      * @return
      * @throws Exception
      */
-    public PolinomioVectorForma1 sumar(int exponente, int coeficiente) throws Exception {
+    public PolinomioVectorForma1 sumar(int coeficiente, int exponente) throws Exception {
         PolinomioVectorForma1 polB;
         if (coeficiente != 0) {
             /**
