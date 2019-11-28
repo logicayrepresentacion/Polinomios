@@ -22,8 +22,6 @@
  */
 package polinomios.vectores.forma2;
 
-import polinomios.vectores.forma1.*;
-
 /**
  *
  * @author alejandroescobar
@@ -35,18 +33,17 @@ public class Ejemplo4Forma2 {
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-        
-        PolinomioVectorForma1 polA = new PolinomioVectorForma1();
-        
+
+        PolinomioVectorForma2 polA = new PolinomioVectorForma2();
+
         polA = polA.sumar(4, 2);
         polA = polA.sumar(100, 200);
         polA = polA.sumar(98, 1000);
         polA = polA.sumar(4, 2);
         polA = polA.sumar(4, 2);
         polA = polA.sumar(4, 2);
-        
-        
-        System.out.println( polA ) ;
+
+        System.out.println(polA);
     }
-    
+
 }
