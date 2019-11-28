@@ -41,6 +41,10 @@ public class PolinomioVectorForma2 {
         this.terminos = terminos;
     }
 
+    public PolinomioVectorForma2() {
+        terminos = null;
+    }
+
     /**
      * Obtener el grado del polinomio
      *
@@ -171,6 +175,21 @@ public class PolinomioVectorForma2 {
             }
         }
         return polC;
+    }
+
+    public PolinomioVectorForma2 sumar(double c, int e) {
+
+        Termino termino = new Termino(e, c);
+        Termino[] terminosC = new Termino[1];
+        terminosC[0] = termino;
+        PolinomioVectorForma2 polC = new PolinomioVectorForma2(terminosC);
+
+        if (this.terminos == null) {
+            return polC;
+        } else {
+            return this.sumar(polC);
+        }
+
     }
 
     /**

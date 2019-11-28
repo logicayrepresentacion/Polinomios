@@ -29,14 +29,14 @@ import polinomios.util.Termino;
  *
  * @author alejandroescobar
  */
-public class PolinomioListaSimple {
+public class PolinomioListaSimpleConCabeza {
 
     private final Nodo cabeza;
 
     /**
      * Constructor para un polinomio sin terminos
      */
-    PolinomioListaSimple() {
+    PolinomioListaSimpleConCabeza() {
         cabeza = new Nodo(null);
         cabeza.setLiga(null);
     }
@@ -50,37 +50,47 @@ public class PolinomioListaSimple {
         return cabeza;
     }
 
-    public String mostrar() {
+    @Override
+    public String toString() {
         StringBuilder polinomio = new StringBuilder();
         Nodo p = cabeza.getLiga();
         while (!finRecorrido(p)) {
             Termino ti = p.getTermino();
-            polinomio.append(ti.getC()).append("X^").append(ti.getE()).append(" ");
+            double j = ti.getC();
+            int i = ti.getE();
+            // Para adicionar el simbolo del coeficiente para numeros positivos, excluyendo el simbolo + del primer termino si es positivo.
+            if (j >= 0) {
+                polinomio.append("+");
+            }
+            polinomio.append(j).append("X^").append(i).append(" ");
             p = p.getLiga();
         }
         return polinomio.toString();
     }
 
-    public int getGrado() {
+    public int getGrado() throws Exception {
         Nodo primero = cabeza.getLiga();
+        if (primero == null) {
+            return 0;
+        }
         return primero.getTermino().getE();
-        // ToDo - Validación pendiente por realizar.
     }
 
     /**
      * Metodo para sumar dos polinomios, suma el polinomio a con el polinomio b
      * que se pasa como parametros, no se modifica el polinomio a.
      *
-     * @param pB polinomio a sumar
+     * @param polB polinomio a sumar
      * @return polinomio con el resultado de la suma.
      */
-    public PolinomioListaSimple sumar(PolinomioListaSimple pB) {
-        PolinomioListaSimple pC = new PolinomioListaSimple();
+    public PolinomioListaSimpleConCabeza sumar(PolinomioListaSimpleConCabeza polB) {
+
+        PolinomioListaSimpleConCabeza polC = new PolinomioListaSimpleConCabeza();
 
         // Variables para los recorridos en polinomios a,b y c
         Nodo prA = this.getCabeza().getLiga();
-        Nodo prB = this.getCabeza().getLiga();
-        Nodo uC = pC.getCabeza();
+        Nodo prB = polB.getCabeza().getLiga();
+        Nodo uC = polC.getCabeza();
 
         // Recorrido de los terminos en alguna de las dos listas
         while (!finRecorrido(prA) && !finRecorrido(prB)) {
@@ -118,7 +128,7 @@ public class PolinomioListaSimple {
         }
 
         // Si la lista de terminos del polinomio b finalizo primero
-        while (!finRecorrido(prA)) {
+        while (!finRecorrido(prB)) {
             // Variables para exponente y coefiente de lista polinomio a
             int eA = prA.getTermino().getE();
             double cA = prA.getTermino().getC();
@@ -132,7 +142,7 @@ public class PolinomioListaSimple {
         }
 
         // Si la lista de terminos del polinomio a finalizo primero
-        while (!finRecorrido(prB)) {
+        while (!finRecorrido(prA)) {
             // Variables para exponente y coefiente de lista polinomio a
             int eB = prB.getTermino().getE();
             double cB = prB.getTermino().getC();
@@ -145,7 +155,7 @@ public class PolinomioListaSimple {
             prB = prB.getLiga();
         }
 
-        return pC;
+        return polC;
     }
 
     public double getCoeficiente(int exponente) {

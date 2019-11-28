@@ -31,25 +31,25 @@ import polinomios.util.Termino;
 public class EjemploPolinomioListaSimple {
 
     public static void main(String[] args) {
-        PolinomioListaSimple pA = new PolinomioListaSimple();
+        PolinomioListaSimpleConCabeza pA = new PolinomioListaSimpleConCabeza();
         Termino t = new Termino(10, 5);
         Nodo n = new Nodo(t);
         Nodo cA = pA.getCabeza();
         cA.setLiga(n);
         cA = n;
-        
+
         t = new Termino(0, 20);
         n = new Nodo(t);
         cA.setLiga(n);
-        
-        PolinomioListaSimple pB = pA;
-        
-        PolinomioListaSimple pC = pA.sumar(pB);
-        
-        System.out.println( pA.mostrar()) ;
-        System.out.println( pB.mostrar()) ;
-        System.out.println( pC.mostrar()) ;
-        
+
+        PolinomioListaSimpleConCabeza pB = pA;
+
+        PolinomioListaSimpleConCabeza pC = pA.sumar(pB);
+
+        System.out.println(pA);
+        System.out.println(pB);
+        System.out.println(pC);
+
         System.out.println("Coeficiente con exponente 2 " + pC.getCoeficiente(2));
         System.out.println("Coeficiente con exponente 0 " + pC.getCoeficiente(0));
 
