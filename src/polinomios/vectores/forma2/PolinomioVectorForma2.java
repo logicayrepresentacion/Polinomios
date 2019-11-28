@@ -54,6 +54,9 @@ public class PolinomioVectorForma2 {
     public String toString() {
         StringBuilder polinomio = new StringBuilder();
         boolean primerTermino = true;
+        if (terminos == null) {
+            return "0";
+        }
         for (Termino ti : terminos) {
             double j = ti.getC();
             int i = ti.getE();
