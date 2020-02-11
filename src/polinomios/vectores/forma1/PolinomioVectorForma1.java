@@ -28,7 +28,7 @@ package polinomios.vectores.forma1;
  */
 public class PolinomioVectorForma1 {
 
-    private int[] arreglo;
+    private int[] arregloA;
 
     /**
      * Constructor que crea un arreglo sin coeficientes de grado n
@@ -36,11 +36,11 @@ public class PolinomioVectorForma1 {
      * @param n es el grado
      */
     public PolinomioVectorForma1(int n) {
-        arreglo = new int[n + 2];
-        for (int i = 0; i < arreglo.length; i++) {
-            arreglo[i] = 0;
+        arregloA = new int[n + 2];
+        for (int i = 0; i < arregloA.length; i++) {
+            arregloA[i] = 0;
         }
-        arreglo[0] = n;
+        arregloA[0] = n;
     }
 
     /**
@@ -49,20 +49,26 @@ public class PolinomioVectorForma1 {
      * @param arreglo
      */
     public PolinomioVectorForma1(int[] arreglo) {
-        this.arreglo = arreglo;
+        this.arregloA = arreglo;
     }
 
     /**
      * Constructor que cree un arreglo sin coeficiente
      */
     PolinomioVectorForma1() {
-        arreglo = new int[1];
-        arreglo[0] = -1;
+        arregloA = new int[1];
+        arregloA[0] = -1;
     }
 
+    /**
+     * Obtener el grado
+     *
+     * @return
+     * @throws Exception
+     */
     public int getGrado() throws Exception {
-        if (arreglo != null) {
-            return arreglo[0];
+        if (arregloA != null) {
+            return arregloA[0];
         } else {
             throw new NullPointerException("El arreglo esta nulo");
         }
@@ -77,10 +83,10 @@ public class PolinomioVectorForma1 {
      */
     public int getCoeficiente(int exp) throws Exception {
         int pos = getGrado() - exp + 1;
-        if (pos >= arreglo.length) {
+        if (pos >= arregloA.length) {
             throw new ArrayIndexOutOfBoundsException("El arreglo es de menor tamaño que la posición calculada");
         }
-        return arreglo[pos];
+        return arregloA[pos];
     }
 
     /**
@@ -91,6 +97,9 @@ public class PolinomioVectorForma1 {
      * @throws java.lang.Exception
      */
     public int getExponente(int pos) throws Exception {
+        if (pos >= arregloA.length) {
+            throw new ArrayIndexOutOfBoundsException("El arreglo es de menor tamaño que la posición calculada");
+        }
         int exp = getGrado() - pos + 1;
         return exp;
     }
@@ -99,8 +108,8 @@ public class PolinomioVectorForma1 {
     public String toString() {
         StringBuilder polinomio = new StringBuilder();
         try {
-            for (int i = 1; i < arreglo.length; i++) {
-                int j = arreglo[i];
+            for (int i = 1; i < arregloA.length; i++) {
+                int j = arregloA[i];
                 // Para adicionar el simbolo del coeficiente para numeros positivos, excluyendo el simbolo + del primer termino si es positivo.
                 if (j >= 0 && i != 1) {
                     polinomio.append("+");
@@ -114,71 +123,73 @@ public class PolinomioVectorForma1 {
     }
 
     public void setCoeficiente(int c, int e) throws Exception {
+        if (e > getGrado()) {
+            throw new ArrayIndexOutOfBoundsException("El exponente es superior al grdo del polinomio");
+        }
         int pos = getGrado() - e + 1;
-        arreglo[pos] = c;
+        arregloA[pos] = c;
     }
 
     /**
      * Función para Sumar dos polinomios, entrega un nuevo polinomio resultado
      * de la operación suma. No modifica el polinomio que representa el objeto
      *
-     * @param polB
+     * @param polinomioB
      * @return
      * @throws java.lang.Exception
      */
-    public PolinomioVectorForma1 sumar(PolinomioVectorForma1 polB) throws Exception {
+    public PolinomioVectorForma1 sumar(PolinomioVectorForma1 polinomioB) throws Exception {
 
-        PolinomioVectorForma1 polC;
-
-        if (polB == null) {
+        PolinomioVectorForma1 polinomioC;
+        if (polinomioB == null) {
             throw new Exception("El polinomio b es null");
         }
 
         // Bloque para validar si los arreglos son nulos o no
-        int[] arrB = polB.getArreglo();
-        if (arrB == null) {
-            if (arreglo == null) {
-                polC = new PolinomioVectorForma1();
+        int[] arregloB = polinomioB.getArreglo();
+        if (arregloB == null) {
+            if (arregloA == null) {
+                polinomioC = new PolinomioVectorForma1();
             } else {
-                int[] arregloNuevo = new int[arreglo.length];
-                System.arraycopy(arreglo, 0, arregloNuevo, 0, arreglo.length);
-                polC = new PolinomioVectorForma1(arregloNuevo);
-                return polC;
+                int[] arregloNuevo = new int[arregloA.length];
+                System.arraycopy(arregloA, 0, arregloNuevo, 0, arregloA.length);
+                polinomioC = new PolinomioVectorForma1(arregloNuevo);
+                return polinomioC;
             }
         } else {
-            if (arreglo == null) {
-                int[] arregloNuevo = new int[arrB.length];
-                System.arraycopy(arrB, 0, arregloNuevo, 0, arrB.length);
-                polC = new PolinomioVectorForma1(arregloNuevo);
-                return polC;
+            if (arregloA == null) {
+                int[] arregloNuevo = new int[arregloB.length];
+                System.arraycopy(arregloB, 0, arregloNuevo, 0, arregloB.length);
+                polinomioC = new PolinomioVectorForma1(arregloNuevo);
+                return polinomioC;
             }
         }
 
         // Este es el caso en que ambos arreglos no son nulos
         int gradoA = getGrado();
-        int gradoB = polB.getGrado();
+        int gradoB = polinomioB.getGrado();
         int nGrado = (gradoA > gradoB) ? gradoA : gradoB;
-        polC = new PolinomioVectorForma1(nGrado);
+        polinomioC = new PolinomioVectorForma1(nGrado);
 
         int e = 0;
         while (e <= gradoA && e <= gradoB) {
-            int nC = getCoeficiente(e) + polB.getCoeficiente(e);
-            polC.setCoeficiente(nC, e);
+            int nC = getCoeficiente(e) + polinomioB.getCoeficiente(e);
+            polinomioC.setCoeficiente(nC, e);
             e++;
         }
 
         while (e <= gradoA) {
-            polC.setCoeficiente(getCoeficiente(e), e);
+            polinomioC.setCoeficiente(getCoeficiente(e), e);
             e++;
         }
 
         while (e <= gradoB) {
-            polC.setCoeficiente(polB.getCoeficiente(e), e);
+            polinomioC.setCoeficiente(polinomioB.getCoeficiente(e), e);
             e++;
         }
 
-        polC.normalizar();
-        return polC;
+        polinomioC.normalizar();
+        return polinomioC;
     }
 
     public int getDiferentesCero() {
@@ -186,7 +197,7 @@ public class PolinomioVectorForma1 {
     }
 
     public int[] getArreglo() {
-        return arreglo;
+        return arregloA;
     }
 
     public void ingresar(double coeficiente, int exponente) {
@@ -196,25 +207,24 @@ public class PolinomioVectorForma1 {
     /**
      * Permite validar el arreglo y garantizar que no tenga terminos iniciales
      * en 0
-     *
      */
     private void normalizar() {
 
         // Si la primera posición es 0
-        if (arreglo[1] == 0) {
+        if (arregloA[1] == 0) {
             int i = 1;
-            while (i < arreglo.length && arreglo[i] == 0) {
+            while (i < arregloA.length && arregloA[i] == 0) {
                 i++;
             }
-            if (i < arreglo.length) {
+            if (i < arregloA.length) {
                 int nuevoGrado = i - 1;
                 int nuevoArreglo[] = new int[nuevoGrado + 2];
                 nuevoArreglo[0] = nuevoGrado;
-                System.arraycopy(arreglo, i, nuevoArreglo, 1, arreglo.length - i);
-                arreglo = nuevoArreglo;
+                System.arraycopy(arregloA, i, nuevoArreglo, 1, arregloA.length - i);
+                arregloA = nuevoArreglo;
             } else {
-                arreglo = new int[1];
-                arreglo[0] = -1;
+                arregloA = new int[1];
+                arregloA[0] = -1;
             }
         }
     }
