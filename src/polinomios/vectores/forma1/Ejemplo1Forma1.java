@@ -34,18 +34,18 @@ public class Ejemplo1Forma1 {
      */
     public static void main(String[] args) throws Exception {
         // 8x6  + 4x3 – 5
-        int arrPolA[] = {6, 8, 0, 0, 4, 0, 0, -5};
+        int arregloRepresentaPolinomioA[] = {6, 8, 0, 0, 4, 0, 0, -5};
         // 25x2 + 10x + 20
-        int arrPolB[] = {2, 25, 10, 20};
+        int arregloRepresentaPolinomioB[] = {2, 25, 10, 20};
 
-        PolinomioVectorForma1 polA = new PolinomioVectorForma1(arrPolA);
-        PolinomioVectorForma1 polB = new PolinomioVectorForma1(arrPolB);
+        PolinomioVectorForma1 polinomioA = new PolinomioVectorForma1(arregloRepresentaPolinomioA);
+        PolinomioVectorForma1 polinomioB = new PolinomioVectorForma1(arregloRepresentaPolinomioB);
 
-        System.out.println(polA);
-        System.out.println(polB);
+        System.out.println(polinomioA);
+        System.out.println(polinomioB);
 
-        PolinomioVectorForma1 polNuevo = polA.sumar(polB);
-        System.out.println(polNuevo);
+        PolinomioVectorForma1 polinomioCNuevo = polinomioA.sumar(polinomioB);
+        System.out.println(polinomioCNuevo);
     }
 
 }

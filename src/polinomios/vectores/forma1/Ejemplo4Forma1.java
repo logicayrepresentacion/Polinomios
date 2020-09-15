@@ -33,18 +33,22 @@ public class Ejemplo4Forma1 {
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-        
+
         PolinomioVectorForma1 polA = new PolinomioVectorForma1();
-        
-        polA = polA.sumar(4, 2);
-        polA = polA.sumar(100, 200);
-        polA = polA.sumar(98, 1000);
-        polA = polA.sumar(4, 2);
-        polA = polA.sumar(4, 2);
-        polA = polA.sumar(4, 2);
-        
-        
-        System.out.println( polA ) ;
+
+        polA = polA.sumarTermino(4, 2);
+        polA = polA.sumarTermino(5, 6);
+        polA = polA.sumarTermino(98, 5);
+        polA = polA.sumarTermino(4, 2);
+        polA = polA.sumarTermino(4, 2);
+        polA = polA.sumarTermino(4, 2);
+
+        System.out.println(polA);
+
+        polA = polA.sumarTermino(-16, 20);
+
+        System.out.println(polA);
+
     }
-    
+
 }
