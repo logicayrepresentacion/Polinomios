@@ -68,6 +68,11 @@ public class PolinomioListaSimpleConCabeza {
         return polinomio.toString();
     }
 
+    /**
+     * 
+     * @return
+     * @throws Exception 
+     */
     public int getGrado() throws Exception {
         Nodo primero = cabeza.getLiga();
         if (primero == null) {
@@ -85,74 +90,76 @@ public class PolinomioListaSimpleConCabeza {
      */
     public PolinomioListaSimpleConCabeza sumar(PolinomioListaSimpleConCabeza polB) {
 
+        //ToDo - Validación de datos
+        
         PolinomioListaSimpleConCabeza polC = new PolinomioListaSimpleConCabeza();
 
         // Variables para los recorridos en polinomios a,b y c
-        Nodo prA = this.getCabeza().getLiga();
-        Nodo prB = polB.getCabeza().getLiga();
-        Nodo uC = polC.getCabeza();
+        Nodo nodoRecorridoA = this.getCabeza().getLiga();
+        Nodo nodoRecorridoB = polB.getCabeza().getLiga();
+        Nodo ultimoNodoC = polC.getCabeza();
 
         // Recorrido de los terminos en alguna de las dos listas
-        while (!finRecorrido(prA) && !finRecorrido(prB)) {
+        while (!finRecorrido(nodoRecorridoA) && !finRecorrido(nodoRecorridoB)) {
             // Variables de exponente y coeficiente de terminos
-            int eA = prA.getTermino().getE();
-            double cA = prA.getTermino().getC();
-            int eB = prB.getTermino().getE();
-            double cB = prB.getTermino().getC();
+            int eA = nodoRecorridoA.getTermino().getE();
+            double cA = nodoRecorridoA.getTermino().getC();
+            int eB = nodoRecorridoB.getTermino().getE();
+            double cB = nodoRecorridoB.getTermino().getC();
 
             if (eA > eB) { //Traslado datos del Termino de A.
                 Termino t = new Termino(eA, cA);
-                Nodo n = new Nodo(t);
-                uC.setLiga(n);
-                uC = n;
-                prA = prA.getLiga(); // recorro la lista polinomio de a
+                Nodo nuevoNodo = new Nodo(t);
+                ultimoNodoC.setLiga(nuevoNodo);
+                ultimoNodoC = nuevoNodo;
+                nodoRecorridoA = nodoRecorridoA.getLiga(); // recorro la lista polinomio de a
             } else if (eA == eB) { // Opero terminos de a y b
                 double posibleCoeficienteC = cA + cB;
                 // Si el coeficiente resultado es 0 no se lleva a polinomio c.
                 if (posibleCoeficienteC != 0) {
                     Termino t = new Termino(eA, posibleCoeficienteC);
-                    Nodo n = new Nodo(t);
-                    uC.setLiga(n);
-                    uC = n;
+                    Nodo nuevoNodo = new Nodo(t);
+                    ultimoNodoC.setLiga(nuevoNodo);
+                    ultimoNodoC = nuevoNodo;
                 }
                 // recorro la lista de polinomio a y b
-                prA = prA.getLiga();
-                prB = prB.getLiga();
+                nodoRecorridoA = nodoRecorridoA.getLiga();
+                nodoRecorridoB = nodoRecorridoB.getLiga();
             } else {
                 Termino t = new Termino(eB, cB);
-                Nodo n = new Nodo(t);
-                uC.setLiga(n);
-                uC = n;
-                prB = prB.getLiga(); // recorro la lista polinomio de b
+                Nodo nuevoNodo = new Nodo(t);
+                ultimoNodoC.setLiga(nuevoNodo);
+                ultimoNodoC = nuevoNodo;
+                nodoRecorridoB = nodoRecorridoB.getLiga(); // recorro la lista polinomio de b
             }
         }
 
-        // Si la lista de terminos del polinomio b finalizo primero
-        while (!finRecorrido(prB)) {
+        // Si la lista de terminos del polinomio B finalizo primero
+        while (!finRecorrido(nodoRecorridoB)) {
             // Variables para exponente y coefiente de lista polinomio a
-            int eA = prA.getTermino().getE();
-            double cA = prA.getTermino().getC();
+            int eA = nodoRecorridoA.getTermino().getE();
+            double cA = nodoRecorridoA.getTermino().getC();
             // Creo el nuevo termino, nuevo nodo y ligo en c
             Termino t = new Termino(eA, cA);
             Nodo n = new Nodo(t);
-            uC.setLiga(n);
-            uC = n;
+            ultimoNodoC.setLiga(n);
+            ultimoNodoC = n;
             // me sigo moviendo en lista a
-            prA = prA.getLiga();
+            nodoRecorridoA = nodoRecorridoA.getLiga();
         }
 
         // Si la lista de terminos del polinomio a finalizo primero
-        while (!finRecorrido(prA)) {
+        while (!finRecorrido(nodoRecorridoA)) {
             // Variables para exponente y coefiente de lista polinomio a
-            int eB = prB.getTermino().getE();
-            double cB = prB.getTermino().getC();
+            int eB = nodoRecorridoB.getTermino().getE();
+            double cB = nodoRecorridoB.getTermino().getC();
             // Creo el nuevo termino, nuevo nodo y ligo en c
             Termino t = new Termino(eB, cB);
             Nodo n = new Nodo(t);
-            uC.setLiga(n);
-            uC = n;
+            ultimoNodoC.setLiga(n);
+            ultimoNodoC = n;
             // me sigo moviendo en lista b
-            prB = prB.getLiga();
+            nodoRecorridoB = nodoRecorridoB.getLiga();
         }
 
         return polC;

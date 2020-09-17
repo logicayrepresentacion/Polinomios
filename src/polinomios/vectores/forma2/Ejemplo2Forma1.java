@@ -23,7 +23,6 @@
 package polinomios.vectores.forma2;
 
 import polinomios.util.Termino;
-import polinomios.vectores.forma1.*;
 
 /**
  *

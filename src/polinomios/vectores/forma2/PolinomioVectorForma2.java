@@ -104,72 +104,73 @@ public class PolinomioVectorForma2 {
         Termino[] terminosPolB = polB.getTerminos();
         Termino[] terminosPolA = terminos;
         // Cantidades de terminos diferentes de cero
-        int ctA = terminosPolA.length;
-        int ctB = terminosPolB.length;
+        int cantidadTerminosA = terminosPolA.length;
+        int cantidadTerminosB = terminosPolB.length;
         // Nuevo arreglo para el polinomio resultado polC
-        Termino[] terminosPolC = new Termino[ctA + ctB];
-        PolinomioVectorForma2 polC = new PolinomioVectorForma2(terminosPolC);
+        Termino[] terminosPolC = new Termino[cantidadTerminosA + cantidadTerminosB];
+
         // indices para recorrer
-        int iC = 0;
-        int iA = 0;
-        int iB = 0;
+        int indiceC = 0;
+        int iRecorridoA = 0;
+        int iRecorridoB = 0;
 
         // Recorrido de A y B en paralelo
-        while (iA < ctA && iB < ctB) {
+        while (iRecorridoA < cantidadTerminosA && iRecorridoB < cantidadTerminosB) {
             // Variables para los datos de cada termino exponente y coeficiente
-            int eA = terminosPolA[iA].getE();
-            double cA = terminosPolA[iA].getC();
-            int eB = terminosPolB[iB].getE();
-            double cB = terminosPolB[iB].getC();
+            int eA = terminosPolA[iRecorridoA].getE();
+            double cA = terminosPolA[iRecorridoA].getC();
+            int eB = terminosPolB[iRecorridoB].getE();
+            double cB = terminosPolB[iRecorridoB].getC();
 
             if (eA > eB) { //Traslado datos del Termino de A.
-                terminosPolC[iC] = new Termino(eA, cA);
-                iA++;
-                iC++;
+                terminosPolC[indiceC] = new Termino(eA, cA);
+                iRecorridoA++;
+                indiceC++;
             } else if (eA == eB) {
                 double posibleCoeficienteC = cA + cB;
                 if (posibleCoeficienteC != 0) {
-                    terminosPolC[iC] = new Termino(eA, posibleCoeficienteC);
-                    iC++;
+                    terminosPolC[indiceC] = new Termino(eA, posibleCoeficienteC);
+                    indiceC++;
                 }
-                iA++;
-                iB++;
+                iRecorridoA++;
+                iRecorridoB++;
             } else {
-                terminosPolC[iC] = new Termino(eB, cB);
-                iB++;
-                iC++;
+                terminosPolC[indiceC] = new Termino(eB, cB);
+                iRecorridoB++;
+                indiceC++;
             }
         }
 
         // Recorrer los terminos de A por si no se agoto en el recorrido anterior
-        while (iA < ctA) {
+        while (iRecorridoA < cantidadTerminosA) {
             // Variables para los datos del termino en A
-            int eA = terminosPolA[iA].getE();
-            double cA = terminosPolA[iA].getC();
-            terminosPolC[iC] = new Termino(eA, cA);
-            iA++;
-            iC++;
+            int eA = terminosPolA[iRecorridoA].getE();
+            double cA = terminosPolA[iRecorridoA].getC();
+            terminosPolC[indiceC] = new Termino(eA, cA);
+            iRecorridoA++;
+            indiceC++;
         }
 
         // Recorrer los terminos de B por si no se agoto en el recorrido anterior
-        while (iB < ctB) {
+        while (iRecorridoB < cantidadTerminosB) {
             // Variables para los datos del termino en B
-            int eB = terminosPolB[iB].getE();
-            double cB = terminosPolB[iB].getC();
-            terminosPolC[iC] = new Termino(eB, cB);
-            iB++;
-            iC++;
+            int eB = terminosPolB[iRecorridoB].getE();
+            double cB = terminosPolB[iRecorridoB].getC();
+            terminosPolC[indiceC] = new Termino(eB, cB);
+            iRecorridoB++;
+            indiceC++;
         }
 
+        PolinomioVectorForma2 polC = null;
         // normalizar el arreglo de terminos
-        if (iC == 0) {
+        if (indiceC == 0) {
             polC = new PolinomioVectorForma2(null);
             return polC;
         } else {
-            if (iC < terminosPolC.length) {
-                Termino[] terminosCTemporal = new Termino[iC];
+            if (indiceC < terminosPolC.length) {
+                Termino[] terminosCTemporal = new Termino[indiceC];
 
-                System.arraycopy(terminosPolC, 0, terminosCTemporal, 0, iC);
+                System.arraycopy(terminosPolC, 0, terminosCTemporal, 0, indiceC);
                 polC = new PolinomioVectorForma2(terminosCTemporal);
                 return polC;
             }
@@ -177,17 +178,23 @@ public class PolinomioVectorForma2 {
         return polC;
     }
 
+    /**
+     * 
+     * @param c
+     * @param e
+     * @return 
+     */
     public PolinomioVectorForma2 sumar(double c, int e) {
 
         Termino termino = new Termino(e, c);
         Termino[] terminosC = new Termino[1];
         terminosC[0] = termino;
-        PolinomioVectorForma2 polC = new PolinomioVectorForma2(terminosC);
+        PolinomioVectorForma2 polinomioB = new PolinomioVectorForma2(terminosC);
 
         if (this.terminos == null) {
-            return polC;
+            return polinomioB;
         } else {
-            return this.sumar(polC);
+            return this.sumar(polinomioB);
         }
 
     }
