@@ -184,7 +184,7 @@ public class PolinomioVectorForma2 {
      * @param e
      * @return 
      */
-    public PolinomioVectorForma2 sumar(double c, int e) {
+    public PolinomioVectorForma2 sumarTermino(double c, int e) {
 
         Termino termino = new Termino(e, c);
         Termino[] terminosC = new Termino[1];

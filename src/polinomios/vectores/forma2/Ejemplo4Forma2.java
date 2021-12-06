@@ -36,17 +36,17 @@ public class Ejemplo4Forma2 {
 
         PolinomioVectorForma2 polA = new PolinomioVectorForma2();
 
-        polA = polA.sumar(4, 2);
+        polA = polA.sumarTermino(4, 2);
 
-        polA = polA.sumar(100, 200);
+        polA = polA.sumarTermino(100, 200);
 
-        polA = polA.sumar(98, 1000);
+        polA = polA.sumarTermino(98, 1000);
 
-        polA = polA.sumar(4, 2);
+        polA = polA.sumarTermino(4, 2);
 
-        polA = polA.sumar(4, 2);
+        polA = polA.sumarTermino(4, 2);
 
-        polA = polA.sumar(4, 2);
+        polA = polA.sumarTermino(4, 2);
 
         System.out.println(polA);
     }
