@@ -187,7 +187,7 @@ public class PolinomioListaSimpleConCabeza {
         return p == null;
     }
 
-    public void ingresar(double coeficiente, int exponente) {
+    public PolinomioListaSimpleConCabeza sumarTermino(double coeficiente, int exponente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
